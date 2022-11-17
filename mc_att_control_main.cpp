@@ -57,7 +57,6 @@
 #include <eigen3/Eigen/Cholesky>
 #include <eigen3/unsupported/Eigen/MatrixFunctions>
 #include <math.h>
-#include "matrix.h"
 #include <chrono>
 
 
@@ -443,15 +442,15 @@ MulticopterAttitudeControl::runAcado(Eigen::Vector3f position, Eigen::Vector3f v
         acadoVariables.W[13*0 + 144*i] = 100;
         acadoVariables.W[13*1 + 144*i] = 100;
         acadoVariables.W[13*2 + 144*i] = 100;
-        acadoVariables.W[13*3 + 144*i] = 100;
-        acadoVariables.W[13*4 + 144*i] = 100;
-        acadoVariables.W[13*5 + 144*i] = 100;
+        acadoVariables.W[13*3 + 144*i] = 1;
+        acadoVariables.W[13*4 + 144*i] = 1;
+        acadoVariables.W[13*5 + 144*i] = 10;
         acadoVariables.W[13*6 + 144*i] = 10;
         acadoVariables.W[13*7 + 144*i] = 10;
         acadoVariables.W[13*8 + 144*i] = 10;
-        acadoVariables.W[13*9 + 144*i] = 0.5;
-        acadoVariables.W[13*10 + 144*i] = 0.5;
-        acadoVariables.W[13*11 + 144*i] = 0.5;
+        acadoVariables.W[13*9 + 144*i] = 1;
+        acadoVariables.W[13*10 + 144*i] = 1;
+        acadoVariables.W[13*11 + 144*i] = 1;
     }
 
     for (int i=0; i<NX; i++){
@@ -460,6 +459,8 @@ MulticopterAttitudeControl::runAcado(Eigen::Vector3f position, Eigen::Vector3f v
     acadoVariables.WN[0] = 100;
     acadoVariables.WN[10] = 100;
     acadoVariables.WN[20] = 100;
+    acadoVariables.WN[30] = 1;
+    acadoVariables.WN[40] = 1;
 
 
     for(int i=0; i<NY*NH; ++i){
@@ -532,11 +533,11 @@ MulticopterAttitudeControl::runAcado(Eigen::Vector3f position, Eigen::Vector3f v
             acadoVariables.y[i] = pd_[2];
         }
         if(i%NY==9){
-            acadoVariables.y[i] = +0.1f*(position[0]-xd_[0])+0.01f*(velocity[0]-vd_[0])+0.01f*(p[0]-pd_[0]);
+            acadoVariables.y[i] = +0.05f*(position[0]-xd_[0])+0.01f*(velocity[0]-vd_[0])+0.01f*(p[0]-pd_[0]);
 //            acadoVariables.y[i] = 0.0f;
         }
         if(i%NY==10){
-            acadoVariables.y[i] = +0.1f*(position[1]-xd_[1])+0.01f*(velocity[1]-vd_[1])+0.01f*(p[1]-pd_[1]);
+            acadoVariables.y[i] = +0.05f*(position[1]-xd_[1])+0.01f*(velocity[1]-vd_[1])+0.01f*(p[1]-pd_[1]);
 //            acadoVariables.y[i] = 0.0f;
         }
         if(i%NY==11){
@@ -1062,7 +1063,7 @@ MulticopterAttitudeControl::Run() {
                 const Quatf quat{_vehicle_odometry.q};
                 float yaw_ = Eulerf(quat).psi(); // From NED to OURS
 //                float yaw_desired = _vehicle_trajectory_setpoint.yaw; // Set desired yaw here IN NED
-                float yaw_desired = 3.14/3;
+                float yaw_desired = 0;
 //                yaw_desired = yaw_desired*-1; // CHANGE to ENU
                 float w0 = -2.0f*(yaw_-yaw_desired);
 

@@ -75,16 +75,16 @@ px4_add_module(
 #		mpc_solver_shorter/qpoases/SRC/Utils.cpp
 #		mpc_solver_shorter/qpoases/SRC/EXTRAS/SolutionAnalysis.cpp
 
-		mpc_least_square_engl/matrix.cpp
-		mpc_least_square_engl/mpc.cpp
-		mpc_least_square_engl/konfig.h
-		mpc_least_square_engl/matrix.h
-		mpc_least_square_engl/mpc.h
-		mpc_least_square_engl/mpc_least_square_engl.ino
-		cvxgen/ldl.c
-		cvxgen/matrix_support.c
-		cvxgen/solver.c
-		cvxgen/util.c
+#		mpc_least_square_engl/matrix.cpp
+#		mpc_least_square_engl/mpc.cpp
+#		mpc_least_square_engl/konfig.h
+#		mpc_least_square_engl/matrix.h
+#		mpc_least_square_engl/mpc.h
+#		mpc_least_square_engl/mpc_least_square_engl.ino
+#		cvxgen/ldl.c
+#		cvxgen/matrix_support.c
+#		cvxgen/solver.c
+#		cvxgen/util.c
 	DEPENDS
 		AttitudeControl
 		mathlib
@@ -98,8 +98,8 @@ px4_add_module(
 #		mpc_solver_shorter/qpoases/INCLUDE
 #		mpc_solver_shorter/qpoases/SRC
 
-		mpc_least_square_engl
-		cvxgen
+#		mpc_least_square_engl
+#		cvxgen
 	)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fopenmp")

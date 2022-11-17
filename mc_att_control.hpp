@@ -71,8 +71,6 @@
 #include <AttitudeControl.hpp>
 #include <lapacke.h>
 #include "mpc.h"
-#include "konfig.h"
-#include "matrix.h"
 
 
 extern "C"{
